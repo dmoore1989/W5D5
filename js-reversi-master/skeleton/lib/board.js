@@ -48,7 +48,21 @@ Board.prototype.getPiece = function (pos) {
  * Checks if there are any valid moves for the given color.
  */
 Board.prototype.hasMove = function (color) {
+  colorOpp = (color === 'white' ? 'black' : 'white')
+  this.grid.forEach(function(row, i){
+    row.forEach(function(el, j){
+      if (el.color === color){
+        this.DIRS.forEach(function(pos){
+          if(grid[i + pos[0]][j + pos[1]].color === colorOpp){
+            return true;
+          }
+        });
+      }
+    });
+  });
+  return false
 };
+
 
 /**
  * Checks if the piece at a given position
